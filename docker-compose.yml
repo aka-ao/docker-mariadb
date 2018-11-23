@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  mariadb:
+    image: mariadb:10.3.2
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker-compose/mariadb/initdb:/docker-entrypoint-initdb.d
+      - ./docker-compose/mariadb/log:/var/log/mysql
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hoge
+
+volumes:
+    mariadb-data:
+        driver: local
